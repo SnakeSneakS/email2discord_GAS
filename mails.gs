@@ -9,6 +9,7 @@ function getMailMessages(since){
 
   let latest = since;
 
+  let msg_num = 0;
   let new_msgs = new Array(msgs.length);
   for(let i=0;i<msgs.length;i++){
     new_msgs[i] = new Array();
@@ -16,12 +17,13 @@ function getMailMessages(since){
       const msgDate = msgs[i][j].getDate()
       if(msgDate > since){
         new_msgs[i].push(msgs[i][j]); //送信対象に追加
-        if(latest > msgDate){
+        msg_num ++;
+        if(msgDate > latest){
           latest = msgDate;
         }
       }
     }
   }
-  console.log("new gmail messages is ", new_msgs.length ," since ", since);
+  console.log("new gmail messages is ", msg_num ," since ", since, ".\nlatest message: ", latest);
   return [new_msgs, latest];
 }
